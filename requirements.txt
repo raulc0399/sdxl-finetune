@@ -1,0 +1,17 @@
+parquet
+pandas
+pyarrow
+transformers
+bitsandbytes
+accelerate
+pillow
+diffusers[torch]
+sentencepiece
+beautifulsoup4
+peft
+# on Windows uncomment
+# --extra-index-url https://download.pytorch.org/whl/cu121
+torch
+torchvision
+datasets
+wandb
