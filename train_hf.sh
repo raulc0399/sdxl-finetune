@@ -1,21 +1,18 @@
 #!/bin/bash
 
 export MODEL_NAME="stabilityai/stable-diffusion-xl-base-1.0"
-export VAE_NAME="madebyollin/sdxl-vae-fp16-fix"
 export DATASET_DIR="../PixArt-alpha-finetuning/data/lego-city-adventures-captions"
 export CAPTION_COLUMN="llava_caption_with_orig_caption"
 
-accelerate launch train_text_to_image_sdxl.py \
+accelerate launch train_text_to_image_lora_sdxl.py \
   --pretrained_model_name_or_path=$MODEL_NAME \
-  --pretrained_vae_model_name_or_path=$VAE_NAME \
   --train_data_dir=$DATASET_DIR --caption_column=$CAPTION_COLUMN \
   --resolution=512 --center_crop --random_flip \
-  --proportion_empty_prompts=0.2 \
   --train_batch_size=2 \
-  --gradient_accumulation_steps=2 --gradient_checkpointing \
-  --max_train_steps=10000 \
+  --gradient_accumulation_steps=1 --gradient_checkpointing \
+  --max_train_steps=15000 \
   --num_train_epochs=100 \
-  --learning_rate=1e-06 --lr_scheduler="constant" --lr_warmup_steps=0 \
+  --learning_rate=1e-04 --lr_scheduler="constant" --lr_warmup_steps=0 \
   --mixed_precision="fp16" \
   --report_to="wandb" \
   --rank=16 \

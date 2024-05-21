@@ -782,6 +782,8 @@ def main(args):
             models.extend([text_encoder_one, text_encoder_two])
         cast_training_params(models, dtype=torch.float32)
 
+    unet.print_trainable_parameters()
+
     # Use 8-bit Adam for lower memory usage or to fine-tune the model in 16GB GPUs
     if args.use_8bit_adam:
         try:
@@ -990,7 +992,7 @@ def main(args):
     # We need to initialize the trackers we use, and also store our configuration.
     # The trackers initializes automatically on the main process.
     if accelerator.is_main_process:
-        accelerator.init_trackers("text2image-fine-tune", config=vars(args))
+        accelerator.init_trackers("sdxl-fine-tune", config=vars(args))
 
     # Train!
     total_batch_size = args.train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps

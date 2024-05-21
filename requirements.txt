@@ -5,7 +5,7 @@ transformers
 bitsandbytes
 accelerate
 pillow
-diffusers[torch]
+diffusers[torch] @ git+https://github.com/huggingface/diffusers
 sentencepiece
 beautifulsoup4
 peft
