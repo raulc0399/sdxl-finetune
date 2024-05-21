@@ -22,6 +22,7 @@ accelerate launch train_text_to_image_lora_sdxl.py \
   --output_dir="sdxl-lego-city-model" \
   --seed=42 \
   --adam_weight_decay=0.03 --adam_epsilon=1e-10 \
-  --dataloader_num_workers=8
+  --dataloader_num_workers=12 \
+  --snr_gamma=5 
 
 # --learning_rate=3e-04 --lr_scheduler="cosine" --lr_warmup_steps=0 \
