@@ -82,7 +82,7 @@ def print_trainable_parameters(model):
         if param.requires_grad:
             trainable_params += param.numel()
     print(
-        f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}"
+        f"trainable params: {trainable_params:,.0f} || all params: {all_param:,.0f} || trainable%: {100 * trainable_params / all_param}"
     )
 
 def save_model_card(
