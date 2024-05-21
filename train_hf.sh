@@ -10,7 +10,7 @@ accelerate launch train_text_to_image_lora_sdxl.py \
   --resolution=512 --center_crop --random_flip \
   --train_batch_size=2 \
   --gradient_accumulation_steps=1 --gradient_checkpointing \
-  --max_train_steps=15000 \
+  --max_train_steps=20000 \
   --num_train_epochs=100 \
   --learning_rate=1e-04 --lr_scheduler="constant" --lr_warmup_steps=0 \
   --mixed_precision="fp16" \

@@ -71,6 +71,19 @@ logger = get_logger(__name__)
 if is_torch_npu_available():
     torch.npu.config.allow_internal_format = False
 
+def print_trainable_parameters(model):
+    """
+    Prints the number of trainable parameters in the model.
+    """
+    trainable_params = 0
+    all_param = 0
+    for _, param in model.named_parameters():
+        all_param += param.numel()
+        if param.requires_grad:
+            trainable_params += param.numel()
+    print(
+        f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}"
+    )
 
 def save_model_card(
     repo_id: str,
@@ -658,6 +671,7 @@ def main(args):
     )
 
     unet.add_adapter(unet_lora_config)
+    print_trainable_parameters(unet)
 
     # The text encoder comes from 🤗 transformers, we will also attach adapters to it.
     if args.train_text_encoder:
@@ -781,8 +795,6 @@ def main(args):
         if args.train_text_encoder:
             models.extend([text_encoder_one, text_encoder_two])
         cast_training_params(models, dtype=torch.float32)
-
-    unet.print_trainable_parameters()
 
     # Use 8-bit Adam for lower memory usage or to fine-tune the model in 16GB GPUs
     if args.use_8bit_adam:
