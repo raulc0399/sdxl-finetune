@@ -16,7 +16,7 @@ accelerate launch train_text_to_image_lora_sdxl.py \
   --mixed_precision="fp16" \
   --report_to="wandb" \
   --rank=16 \
-  --validation_prompt="Image in lego city adventures style, cute dragon creature" --validation_epochs=5 \
+  --validation_prompt="Image in lego city adventures style, cute dragon creature" --validation_epochs=2 \
   --checkpointing_steps=200 \
   --output_dir="sdxl-lego-city-model" \
   --seed=42 \
