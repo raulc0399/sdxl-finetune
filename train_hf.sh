@@ -13,10 +13,10 @@ accelerate launch train_text_to_image_lora_sdxl.py \
   --train_batch_size=2 \
   --gradient_accumulation_steps=1 --gradient_checkpointing \
   --num_train_epochs=20 \
-  --learning_rate=1e-04 --lr_scheduler="constant" --lr_warmup_steps=0 \
+  --learning_rate=3e-04 --lr_scheduler="constant" --lr_warmup_steps=0 \
   --mixed_precision="fp16" \
   --report_to="wandb" \
-  --rank=16 \
+  --rank=8 \
   --validation_prompt="Image in lego city adventures style, cute dragon creature" --validation_epochs=2 \
   --checkpointing_steps=200 \
   --output_dir="sdxl-lego-city-model" \
