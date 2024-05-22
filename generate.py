@@ -85,18 +85,22 @@ def generate_images(pipe, prefix, refiner):
     current_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     for i, prompt in enumerate(prompts):
         generate_image(pipe, prompt, i, current_time, prefix, output_dir)
-        generate_image(pipe, prompt, i, current_time, f"{prefix}_w_refiner", output_dir, refiner)
+
+        if refiner is not None:
+            generate_image(pipe, prompt, i, current_time, f"{prefix}_w_refiner", output_dir, refiner)
 
         # prompt = f"Image in the style of simpsons cartoons, {prompt}"
         prompt = f"Image in lego city adventures style, {prompt}"
 
         generate_image(pipe, prompt, i, current_time, f"{prefix}_w_trigger", output_dir)
-        generate_image(pipe, prompt, i, current_time, f"{prefix}_w_trigger_and_refiner", output_dir, refiner)
+
+        if refiner is not None:
+            generate_image(pipe, prompt, i, current_time, f"{prefix}_w_trigger_and_refiner", output_dir, refiner)
 
 if __name__ == "__main__":
     if True:
         pipe = get_default_pipeline()
-        refiner = get_refiner(pipe)
+        refiner = None # get_refiner(pipe)
 
         generate_images(pipe, "default", refiner)
 
@@ -105,5 +109,5 @@ if __name__ == "__main__":
         torch.cuda.empty_cache()
 
     pipe = get_lora_pipeline()
-    refiner = get_refiner(pipe)
+    refiner = None # get_refiner(pipe)
     generate_images(pipe, "lora", refiner)
